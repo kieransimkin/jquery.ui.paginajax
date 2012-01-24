@@ -17,9 +17,31 @@
 $.widget( "ui.paginajax", {
 	// These options will be used as defaults
 	options: {
-
+		disabled: false
   
+	},
+	// Set up the widget
+	_create: function() {
+
+	},
+	// Use the _setOption method to respond to changes to options
+	_setOption: function( key, value ) {
+		switch( key ) {
+
+			case "disabled":
+			// handle changes to disabled option
+
+			break;
+
+		}
+
+		$.Widget.prototype._setOption.apply( this, arguments );
+	},
+	destroy: function() {
+		$.Widget.prototype.destroy.call( this );
+
 	}
+	
 });
 }(jQuery));
 	                        
