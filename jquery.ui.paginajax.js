@@ -14,7 +14,7 @@
  */
 
 (function( $ ) {
-$.widget( "ui.paginajax", {
+$.widget( "slinq.paginajax", {
 	// These options will be used as defaults
 	options: {
 		disabled: false
