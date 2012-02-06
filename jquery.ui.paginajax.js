@@ -17,7 +17,6 @@
 $.widget( "slinq.paginajax", {
 	// These options will be used as defaults
 	options: {
-		html_fragments: [],
 		ajax_fragments: { 
 			initial_page_already_loaded: true,
 			url: '',
@@ -25,6 +24,7 @@ $.widget( "slinq.paginajax", {
 			response_format: 'json', // Can be 'json' or 'html'
 			page_count: null 
 		},
+		html_fragments: [], // Alternative to Ajax requests - the fragments can be specified at initialization time
 		initial_page: 1,
 		animation_type: 'slide', // Can be 'slide' or 'fade'
 		control_position: 'top', // Can be either 'top', 'bottom', or an element to which the controls will be added
