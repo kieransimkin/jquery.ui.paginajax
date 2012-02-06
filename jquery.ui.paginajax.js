@@ -21,6 +21,7 @@ $.widget( "slinq.paginajax", {
 			initial_page_already_loaded: true,
 			url: '',
 			options: {},
+			page_variable: 'page',
 			response_format: 'json', // Can be 'json' or 'html'
 			page_count: null 
 		},
@@ -40,10 +41,21 @@ $.widget( "slinq.paginajax", {
 			alert('Paginajax: if the initial page is already loaded, you must specify page_count');
 			return;
 		}
+		this.page=this.options.initial_page;
 		this._do_html_setup();
 	},
 	_do_html_setup: function() { 
 
+	},
+	_get_ajax_url: function(page) { 
+		if (typeof(page)=='undefined') { 
+			page=this.page;
+		}
+		if (typeof(this.options.ajax_fragments.url)=='function') { 
+			return this.options.ajax_fragments.url(page);
+		} else { 
+			return this.options.ajax_fragments.url;
+		}
 	},
 	is_html: function() { 
 		if (this.options.html_fragments.length) { 
