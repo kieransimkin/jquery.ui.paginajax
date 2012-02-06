@@ -47,16 +47,6 @@ $.widget( "slinq.paginajax", {
 	_do_html_setup: function() { 
 
 	},
-	_get_ajax_url: function(page) { 
-		if (typeof(page)=='undefined') { 
-			page=this.page;
-		}
-		if (typeof(this.options.ajax_fragments.url)=='function') { 
-			return this.options.ajax_fragments.url(page);
-		} else { 
-			return this.options.ajax_fragments.url;
-		}
-	},
 	is_html: function() { 
 		if (this.options.html_fragments.length) { 
 			return true;
@@ -66,6 +56,16 @@ $.widget( "slinq.paginajax", {
 	},
 	is_ajax: function() { 
 		return !this.is_html();
+	},
+	_get_ajax_url: function(page) { 
+		if (typeof(page)=='undefined') { 
+			page=this.page;
+		}
+		if (typeof(this.options.ajax_fragments.url)=='function') { 
+			return this.options.ajax_fragments.url(page);
+		} else { 
+			return this.options.ajax_fragments.url;
+		}
 	},
 	_is_ignoring_serverside_page_count: function() { 
 		if (this.is_ajax() && this.options.ajax_fragments.page_count!==null) { 
