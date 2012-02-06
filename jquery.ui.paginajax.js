@@ -23,12 +23,12 @@ $.widget( "slinq.paginajax", {
 			url: '',
 			options: {},
 			response_format: 'json', // Can be 'json' or 'html'
-			page_count: 0
+			page_count: null 
 		},
 		initial_page: 1,
 		animation_type: 'slide', // Can be 'slide' or 'fade'
+		control_position: 'top', // Can be either 'top', 'bottom', or an element to which the controls will be added
 		disabled: false
-  
 	},
 	// Set up the widget
 	_create: function() {
@@ -36,9 +36,12 @@ $.widget( "slinq.paginajax", {
 			alert('Paginajax: initial_page > page_count');
 			return;
 		}
+		if (this.is_ajax() && this.options.ajax_fragments.initial_page_already_loaded && this.options.ajax_fragments.page_count === null) { 
+			alert('Paginajax: if the initial page is already loaded, you must specify page_count');
+			return;
+		}
 		this._do_html_setup();
 	},
-
 	_do_html_setup: function() { 
 
 	},
@@ -53,7 +56,7 @@ $.widget( "slinq.paginajax", {
 		return !this.is_html();
 	},
 	_is_ignoring_serverside_page_count: function() { 
-		if (this.is_ajax() && this.options.ajax_fragments.page_count>0) { 
+		if (this.is_ajax() && this.options.ajax_fragments.page_count!==null) { 
 			return true;
 		} else { 
 			return false;
