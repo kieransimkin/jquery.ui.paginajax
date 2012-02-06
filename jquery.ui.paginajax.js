@@ -41,6 +41,10 @@ $.widget( "slinq.paginajax", {
 			alert('Paginajax: if the initial page is already loaded, you must specify page_count');
 			return;
 		}
+		if (this.options.ajax_fragments.page_count !== null && parseInt(this.options.ajax_fragments.page_count)!=this.options.ajax_fragments.page_count) { 
+			alert('Paginajax: page_count must be an integer');
+			return;
+		}
 		this.page=this.options.initial_page;
 		this._do_html_setup();
 	},
