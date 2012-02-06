@@ -26,12 +26,13 @@ $.widget( "slinq.paginajax", {
 			page_count: 0
 		},
 		initial_page: 1,
+		animation_type: 'slide', // Can be 'slide' or 'fade'
 		disabled: false
   
 	},
 	// Set up the widget
 	_create: function() {
-		if (this._is_ignoring_serverside_pagecount() && this.options.initial_page > this.options.ajax_fragments.page_count) { 
+		if (this._is_ignoring_serverside_page_count() && this.options.initial_page > this.options.ajax_fragments.page_count) { 
 			alert('Paginajax: initial_page > page_count');
 			return;
 		}
@@ -51,7 +52,7 @@ $.widget( "slinq.paginajax", {
 	is_ajax: function() { 
 		return !this.is_html();
 	},
-	_is_ignoring_serverside_pagecount: function() { 
+	_is_ignoring_serverside_page_count: function() { 
 		if (this.is_ajax() && this.options.ajax_fragments.page_count>0) { 
 			return true;
 		} else { 
