@@ -17,16 +17,46 @@
 $.widget( "slinq.paginajax", {
 	// These options will be used as defaults
 	options: {
-		first_page_already_loaded: true,
-		html_fragments: {
-
+		html_fragments: [],
+		ajax_fragments: { 
+			initial_page_already_loaded: true,
+			url: '',
+			options: {},
+			response_format: 'json', // Can be 'json' or 'html'
+			page_count: 0
 		},
+		initial_page: 1,
 		disabled: false
   
 	},
 	// Set up the widget
 	_create: function() {
+		if (this._is_ignoring_serverside_pagecount() && this.options.initial_page > this.options.ajax_fragments.page_count) { 
+			alert('Paginajax: initial_page > page_count');
+			return;
+		}
+		this._do_html_setup();
+	},
 
+	_do_html_setup: function() { 
+
+	},
+	is_html: function() { 
+		if (this.options.html_fragments.length) { 
+			return true;
+		} else { 
+			return false;
+		}
+	},
+	is_ajax: function() { 
+		return !this.is_html();
+	},
+	_is_ignoring_serverside_pagecount: function() { 
+		if (this.is_ajax() && this.options.ajax_fragments.page_count>0) { 
+			return true;
+		} else { 
+			return false;
+		}
 	},
 	// Use the _setOption method to respond to changes to options
 	_setOption: function( key, value ) {
