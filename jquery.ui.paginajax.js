@@ -17,6 +17,10 @@
 $.widget( "slinq.paginajax", {
 	// These options will be used as defaults
 	options: {
+		first_page_already_loaded: true,
+		html_fragments: {
+
+		},
 		disabled: false
   
 	},
@@ -44,6 +48,3 @@ $.widget( "slinq.paginajax", {
 	
 });
 }(jQuery));
-	                        
-
-
