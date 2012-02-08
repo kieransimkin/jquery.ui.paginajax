@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<title>Ajax Custom URL Callback Example</title>
+<meta charset="utf-8">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
+<script src="../jquery.ui.paginajax.js"></script>
+</head>
+<body>
+<div id="paginajax_1"></div><!-- This is the actual container of the widget -->
+<script>
+	$('#paginajax_1').paginajax({ajax_fragments: {
+				url: function(page) { 
+					return 'page'+page+'.html';
+				},
+				response_format: 'html',
+				page_count: 3
+			}});
+</script>
+<br style="clear: both;" />
+&nbsp;
+<br style="clear: both;" />
+<a href="http://slinq.com/software/paginajax">PaginAjax by Kieran Simkin</a><br />
+<a href=".">Return to examples list</a>
+</body>
+</html>
