@@ -28,6 +28,7 @@ $.widget( "slinq.paginajax", {
 		html_fragments: [], // Alternative to Ajax requests - the fragments can be specified at initialization time
 		width: null,
 		height: null,
+		control_height: 20,
 		initial_page: 1,
 		animation_type: 'slide', // Can be 'slide' or 'fade'
 		control_position: 'top', // Can be either 'top', 'bottom', or an element to which the controls will be added
@@ -66,6 +67,10 @@ $.widget( "slinq.paginajax", {
 			alert('Paginajax: if width or height are specified, they must be integers');
 			return;
 		}
+		if (parseInt(this.options.control_height)!=this.options.control_height) { 
+			alert('Paginajax: control_height must be an integer');
+			return;
+		}
 		this.page=this.options.initial_page;
 		this._do_html_setup();
 	},
@@ -78,6 +83,9 @@ $.widget( "slinq.paginajax", {
 		this.frame2.height(this.actual_height);
 		this.controls.width(this.actual_width);
 		this.controls.height(this.actual_height);
+		this.controls_center.width(this.actual_width);
+		this.controls_rightfloat.width(this.actual_width);
+		this.controls_leftfloat.width(this.actual_width);
 	},
 	_do_html_setup: function() { 
                 this.element.html('');
