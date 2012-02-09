@@ -78,7 +78,7 @@ $.widget( "slinq.paginajax", {
 							.css({position: 'relative', overflow: 'hidden', 'z-index': 1,'margin':'auto auto'})
 							.appendTo(this.element);
 
-		this.maindiv.css({width: this.get_width(),height: this.get_height());
+		this.maindiv.css({width: this.get_width(),height: this.get_height()});
 		this.actual_width=this.maindiv.width();
 		this.actual_height=this.maindiv.height();
 
