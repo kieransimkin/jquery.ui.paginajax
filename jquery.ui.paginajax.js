@@ -31,6 +31,7 @@ $.widget( "slinq.paginajax", {
 		initial_page: 1,
 		animation_type: 'slide', // Can be 'slide' or 'fade'
 		control_position: 'top', // Can be either 'top', 'bottom', or an element to which the controls will be added
+		navigation_controls_text: false,
 		disabled: false
 	},
 	// Set up the widget
@@ -85,12 +86,54 @@ $.widget( "slinq.paginajax", {
 		} else if (this.options.control_position==='bottom') { 
 			this.controls.appendTo(this.element);
 		} else {
-			this.controls.appendTo($(this.options.control_position));
+			this.controls.appendTo(this.options.control_position);
 		}
 		this._do_controls_html_setup();
 
 	},
 	_do_controls_html_setup: function() { 
+		var me = this;
+		this.controls_center=$("<div></div>").css({'position': 'absolute','text-align': 'center'}).appendTo(this.controls);
+		this.controls_rightfloat=$("<div></div>").css({'position': 'absolute','text-align': 'right'}).appendTo(this.controls);
+		this.controls_leftfloat=$("<div></div>").css({'text-align': 'left'}).appendTo(this.controls);
+
+		this.controls_first_button=$("<div></div>")
+							.addClass('ui-widget-paginajax-controls-first-button')
+							.html((this.options.navigation_controls_text ? 'Beginning' : null))
+							.appendTo(this.controls_leftfloat)
+							.button({icons: { primary: 'ui-icon-arrowthickstop-1-w', secondary: null}, text: this.options.navigation_controls_text})
+							.css({'margin-left':'5px'})
+							.click(function() {
+								me.first();
+							});
+
+		this.controls_previous_button=$("<div></div>")
+							.addClass('ui-widget-paginajax-controls-previous-button')
+							.html((this.options.navigation_controls_text ? 'Previous' : null))
+							.appendTo(this.controls_leftfloat)
+							.button({icons: { primary: 'ui-icon-arrowthick-1-w', secondary: null}, text: this.options.navigation_controls_text})
+							.click(function() {
+								me.previous();
+							});
+
+		this.controls_next_button=$("<div></div>")
+							.addClass('ui-widget-paginajax-controls-next-button')
+							.html((this.options.navigation_controls_text ? 'Next' : null))
+							.appendTo(this.controls_rightfloat)
+							.button({icons: { primary: null, secondary: 'ui-icon-arrowthick-1-e'}, text: this.options.navigation_controls_text})
+							.click(function() {
+								me.next();
+							});
+
+		this.controls_last_button=$("<div></div>")
+							.addClass("ui-widget-paginajax-controls-last-button")
+							.html((this.options.navigation_controls_text ? 'End' : null))
+							.appendTo(this.controls_rightfloat)
+							.button({icons: { primary: null, secondary: 'ui-icon-arrowthickstop-1-e'}, text: this.options.navigation_controls_text})
+							.css({'margin-right':'5px'})
+							.click(function() {
+								   me.last();
+							});
 
 	},
 	is_html: function() { 
