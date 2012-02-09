@@ -34,6 +34,20 @@ $.widget( "slinq.paginajax", {
 		navigation_controls_text: false,
 		disabled: false
 	},
+	get_width: function() { 
+		if (this.options.width===null) { 
+			return '100%';
+		} else { 
+			return this.options.width+'px';
+		}
+	},
+	get_height: function() { 
+		if (this.options.height===null) { 
+			return '100%';
+		} else { 
+			return this.options.height+'px';
+		}
+	},
 	// Set up the widget
 	_create: function() {
 		if (this._is_ignoring_serverside_page_count() && this.options.initial_page > this.options.ajax_fragments.page_count) { 
@@ -64,6 +78,10 @@ $.widget( "slinq.paginajax", {
 							.css({position: 'relative', overflow: 'hidden', 'z-index': 1,'margin':'auto auto'})
 							.appendTo(this.element);
 
+		this.maindiv.css({width: this.get_width(),height: this.get_height());
+		this.actual_width=this.maindiv.width();
+		this.actual_height=this.maindiv.height();
+
 		this.frame1=$('<div></div>')		.addClass('ui-widget')
 							.addClass('ui-widget-paginajax-frame')
 							.addClass('ui-widget-paginajax-frame1')
@@ -76,11 +94,19 @@ $.widget( "slinq.paginajax", {
 							.css({position: 'absolute', 'top': '0px', 'left': '0px', 'opacity': '0'})
 							.appendTo(this.maindiv);
 
+
 		this.controls=$('<div></div>')		.addClass('ui-widget')
 							.addClass('ui-widget-content')
 							.addClass('ui-corner-all')
 							.addClass('ui-widget-paginajax-controls-div')
 							.css({'z-index': 1,'margin':'auto auto'});
+
+		this.frame1.width(this.actual_width);
+		this.frame2.width(this.actual_width);
+		this.frame1.height(this.actual_height);
+		this.frame2.height(this.actual_height);
+		this.controls.width(this.actual_width);
+		this.controls.height(this.actual_height);
 
 		if (this.options.control_position==='top') { 
 			this.controls.prependTo(this.element);
