@@ -55,6 +55,42 @@ $.widget( "slinq.paginajax", {
 		this._do_html_setup();
 	},
 	_do_html_setup: function() { 
+                this.element.clear();
+
+		this.maindiv=$('<div></div>')		.addClass('ui-widget')
+							.addClass('ui-widget-paginajax-main-div')
+							.css({position: 'relative', overflow: 'hidden', 'z-index': 1,'margin':'auto auto'})
+							.appendTo(this.element);
+
+		this.frame1=$('<div></div>')		.addClass('ui-widget')
+							.addClass('ui-widget-paginajax-frame')
+							.addClass('ui-widget-paginajax-frame1')
+							.css({position: 'absolute', 'top': '0px', 'left': '0px'})
+							.appendTo(this.maindiv);
+
+		this.frame2=$('<div></div>')		.addClass('ui-widget')
+							.addClass('ui-widget-paginajax-frame')
+							.addClass('ui-widget-paginajax-frame2')
+							.css({position: 'absolute', 'top': '0px', 'left': '0px', 'opacity': '0'})
+							.appendTo(this.maindiv);
+
+		this.controls=$('<div></div>')		.addClass('ui-widget')
+							.addClass('ui-widget-content')
+							.addClass('ui-corner-all')
+							.addClass('ui-widget-paginajax-controls-div')
+							.css({'z-index': 1,'margin':'auto auto'});
+
+		if (this.options.control_position==='top') { 
+			this.controls.prependTo(this.element);
+		} else if (this.options.control_position==='bottom') { 
+			this.controls.appendTo(this.element);
+		} else {
+			this.controls.appendTo($(this.options.control_position));
+		}
+		this._do_controls_html_setup();
+
+	},
+	_do_controls_html_setup: function() { 
 
 	},
 	is_html: function() { 
