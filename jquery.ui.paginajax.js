@@ -43,7 +43,7 @@ $.widget( "slinq.paginajax", {
 	},
 	get_height: function() { 
 		if (this.options.height===null) { 
-			return '100%';
+			return 'auto';
 		} else { 
 			return this.options.height+'px';
 		}
