@@ -57,7 +57,8 @@ $.widget( "slinq.paginajax", {
 	},
 	_do_html_setup: function() { 
                 this.element.html('');
-
+		console.log(this.element.height());
+		console.log(this.element.width());
 		this.maindiv=$('<div></div>')		.addClass('ui-widget')
 							.addClass('ui-widget-paginajax-main-div')
 							.css({position: 'relative', overflow: 'hidden', 'z-index': 1,'margin':'auto auto'})
