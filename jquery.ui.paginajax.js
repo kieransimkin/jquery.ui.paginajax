@@ -36,7 +36,7 @@ $.widget( "slinq.paginajax", {
 	},
 	get_width: function() { 
 		if (this.options.width===null) { 
-			return '100%';
+			return 'auto';
 		} else { 
 			return this.options.width+'px';
 		}
@@ -75,7 +75,7 @@ $.widget( "slinq.paginajax", {
 		console.log(this.element.width());
 		this.maindiv=$('<div></div>')		.addClass('ui-widget')
 							.addClass('ui-widget-paginajax-main-div')
-							.css({position: 'relative', overflow: 'hidden', 'z-index': 1,'margin':'auto auto'})
+							.css({position: 'relative', overflow: 'hidden', 'z-index': 1,'margin':'0'})
 							.appendTo(this.element);
 
 		this.maindiv.css({width: this.get_width(),height: this.get_height()});
