@@ -36,14 +36,14 @@ $.widget( "slinq.paginajax", {
 	},
 	get_width: function() { 
 		if (this.options.width===null) { 
-			return 'auto';
+			return '100%';
 		} else { 
 			return this.options.width+'px';
 		}
 	},
 	get_height: function() { 
 		if (this.options.height===null) { 
-			return 'auto';
+			return '100%';
 		} else { 
 			return this.options.height+'px';
 		}
