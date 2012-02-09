@@ -69,18 +69,29 @@ $.widget( "slinq.paginajax", {
 		this.page=this.options.initial_page;
 		this._do_html_setup();
 	},
+	_handle_container_resize: function() { 
+		this.actual_width=this.container.width();
+		this.actual_height=this.container.height();
+		this.frame1.width(this.actual_width);
+		this.frame2.width(this.actual_width);
+		this.frame1.height(this.actual_height);
+		this.frame2.height(this.actual_height);
+		this.controls.width(this.actual_width);
+		this.controls.height(this.actual_height);
+	},
 	_do_html_setup: function() { 
                 this.element.html('');
-		console.log(this.element.height());
-		console.log(this.element.width());
+		this.container=$('<div></div>')		.addClass('ui-widget')
+							.addClass('ui-widget-paginajax-container-div')
+							.appendTo(this.element)
+							.css({width: this.get_width(), height: this.get_height());
+		this._handle_container_resize();
+
 		this.maindiv=$('<div></div>')		.addClass('ui-widget')
 							.addClass('ui-widget-paginajax-main-div')
 							.css({position: 'relative', overflow: 'hidden', 'z-index': 1,'margin':'0'})
-							.appendTo(this.element);
+							.appendTo(this.container);
 
-		this.maindiv.css({width: this.get_width(),height: this.get_height()});
-		this.actual_width=this.maindiv.width();
-		this.actual_height=this.maindiv.height();
 
 		this.frame1=$('<div></div>')		.addClass('ui-widget')
 							.addClass('ui-widget-paginajax-frame')
@@ -94,24 +105,17 @@ $.widget( "slinq.paginajax", {
 							.css({position: 'absolute', 'top': '0px', 'left': '0px', 'opacity': '0'})
 							.appendTo(this.maindiv);
 
-
 		this.controls=$('<div></div>')		.addClass('ui-widget')
 							.addClass('ui-widget-content')
 							.addClass('ui-corner-all')
 							.addClass('ui-widget-paginajax-controls-div')
 							.css({'z-index': 1,'margin':'auto auto'});
 
-		this.frame1.width(this.actual_width);
-		this.frame2.width(this.actual_width);
-		this.frame1.height(this.actual_height);
-		this.frame2.height(this.actual_height);
-		this.controls.width(this.actual_width);
-		this.controls.height(this.actual_height);
 
 		if (this.options.control_position==='top') { 
-			this.controls.prependTo(this.element);
+			this.controls.prependTo(this.container);
 		} else if (this.options.control_position==='bottom') { 
-			this.controls.appendTo(this.element);
+			this.controls.appendTo(this.container);
 		} else {
 			this.controls.appendTo(this.options.control_position);
 		}
