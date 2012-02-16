@@ -52,23 +52,23 @@ $.widget( "slinq.paginajax", {
 	// Set up the widget
 	_create: function() {
 		if (this._is_ignoring_serverside_page_count() && this.options.initial_page > this.options.ajax_fragments.page_count) { 
-			alert('Paginajax: initial_page > page_count');
+			throw new Error('Paginajax: initial_page > page_count');
 			return;
 		}
 		if (this.is_ajax() && this.options.ajax_fragments.initial_page_already_loaded && this.options.ajax_fragments.page_count === null) { 
-			alert('Paginajax: if the initial page is already loaded, you must specify page_count');
+			throw new Error('Paginajax: if the initial page is already loaded, you must specify page_count');
 			return;
 		}
 		if (this.options.ajax_fragments.page_count !== null && parseInt(this.options.ajax_fragments.page_count)!=this.options.ajax_fragments.page_count) { 
-			alert('Paginajax: page_count must be an integer');
+			throw new Error('Paginajax: page_count must be an integer');
 			return;
 		}
 		if ((this.options.width!==null && this.options.width!=parseInt(this.options.width)) || (this.options.height!==null && this.options.height!=parseInt(this.options.height))) { 
-			alert('Paginajax: if width or height are specified, they must be integers');
+			throw new Error('Paginajax: if width or height are specified, they must be integers');
 			return;
 		}
 		if (parseInt(this.options.control_height)!=this.options.control_height) { 
-			alert('Paginajax: control_height must be an integer');
+			throw new Error('Paginajax: control_height must be an integer');
 			return;
 		}
 		this.page=this.options.initial_page;
